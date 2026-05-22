@@ -25,11 +25,7 @@
 
 <script lang="ts" setup>
 import { h, ref } from "vue";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons-vue";
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from "@ant-design/icons-vue";
 import { MenuProps } from "ant-design-vue";
 import { useRouter } from "vue-router";
 
@@ -40,6 +36,11 @@ const doMenuclick = ({ key }: { key: string }) => {
 };
 
 const current = ref<string[]>(["mail"]);
+
+router.afterEach((to) => {
+  current.value = [to.path];
+});
+
 const items = ref<MenuProps["items"]>([
   {
     key: "/",
@@ -61,11 +62,7 @@ const items = ref<MenuProps["items"]>([
   },
   {
     key: "/user/manage",
-    label: h(
-      "a",
-      { href: "https://antdv.com", target: "_blank" },
-      "Navigation Four - Link"
-    ),
+    label: h("a", { href: "https://antdv.com", target: "_blank" }, "Navigation Four - Link"),
     title: "Navigation Four - Link",
   },
 ]);
